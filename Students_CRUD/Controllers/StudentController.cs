@@ -17,8 +17,6 @@ namespace Students_CRUD.Controllers
             _context = context;
         }
 
-       
-
         // GET api/students
         [HttpGet]
         public ActionResult<IEnumerable<Student>> Get()

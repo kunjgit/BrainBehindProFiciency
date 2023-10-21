@@ -22,16 +22,11 @@ namespace Students_CRUD.Models
         public List<Day> Days { get; set; }
 
         // Static constructor to set up the default schedule
-      
-
         public TimeTable()
         {
             RecentUpdatedDate = DateTime.Now;
            
         }
-
-     
-
         
     }
 }

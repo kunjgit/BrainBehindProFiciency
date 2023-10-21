@@ -22,6 +22,7 @@ namespace Students_CRUD.Data
         public DbSet<TimeTable> TimeTables { get; set; }
         public DbSet<Day> Days { get; set; }
         public DbSet<Lecture> Lectures { get; set; }
+        public DbSet<Attendance> Attendances { get; set; }
 
 
     }
