@@ -42,7 +42,6 @@ namespace Students_CRUD.Controllers
         public ActionResult<Student> Post([FromBody] Student student)
         {
 
-        
             _context.Students.Add(student);
    
             _context.SaveChanges();

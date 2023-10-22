@@ -17,10 +17,6 @@ namespace Students_CRUD.Models
 
         public string? Division { get; set; }
 
-        public string Username { get; set; }
-
-        public string Password { get; set; }
-
         public string? Batch { get; set; }
     }
 }

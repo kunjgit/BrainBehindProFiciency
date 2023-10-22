@@ -24,8 +24,7 @@ namespace Students_CRUD.Models
         // Static constructor to set up the default schedule
         public TimeTable()
         {
-            RecentUpdatedDate = DateTime.Now;
-           
+            RecentUpdatedDate = DateTime.Now;  
         }
         
     }

@@ -68,9 +68,9 @@ namespace Students_CRUD.Controllers
 
 
         [HttpGet("{id}/stu/{date}")]
-        public IActionResult GetFromDate(int id, DateTime date)
+        public IActionResult GetFromDate(int id, string date)
         {
-            var attendances = _context.Attendances.Where(a => a.StudentId == id && a.Date.Date == date.Date).ToList();
+            var attendances = _context.Attendances.Where(a => a.StudentId == id && a.Date.Date.ToString() == date).ToList();
             return Ok(attendances);
         }
 
@@ -90,9 +90,9 @@ namespace Students_CRUD.Controllers
         }
 
         [HttpDelete("{lectureid}/{date}")]
-        public IActionResult DeleteByLectureIdAndDate(string lectureid, DateTime date)
+        public IActionResult DeleteByLectureIdAndDate(string lectureid, string date)
         {
-            var attendance = _context.Attendances.FirstOrDefault(a => a.LectureId == lectureid && a.Date.Date == date.Date);
+            var attendance = _context.Attendances.FirstOrDefault(a => a.LectureId == lectureid && a.Date.Date.ToString() == date);
             if (attendance == null)
             {
                 return NotFound();
