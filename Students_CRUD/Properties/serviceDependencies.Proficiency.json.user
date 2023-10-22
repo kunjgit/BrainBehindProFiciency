@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "apis1": {
+      "restored": true,
+      "restoreTime": "2023-10-22T09:32:42.5269019Z"
+    },
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2023-10-22T09:35:06.0340585Z"
+    }
+  },
+  "parameters": {
+    "apis1.resourceGroupName": {
+      "Name": "apis1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "StudentsCRUD20231021132830ResourceGroup"
+    },
+    "apis1.subscriptionId": {
+      "Name": "apis1.subscriptionId",
+      "Type": "subscription",
+      "Value": "b279d566-b1cd-4b67-8321-cd7afaa4fc86"
+    }
+  }
+}
