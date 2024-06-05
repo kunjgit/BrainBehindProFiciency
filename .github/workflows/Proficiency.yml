@@ -35,6 +35,8 @@ jobs:
     runs-on: windows-latest
     needs: build
     steps:
+    - name: Azure Login
+      uses: Azure/login@v2.1.1
     - name: Download artifact from build job
       uses: actions/download-artifact@v3
       with:
@@ -46,3 +48,7 @@ jobs:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.Proficiency_5878 }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+
+
+            
