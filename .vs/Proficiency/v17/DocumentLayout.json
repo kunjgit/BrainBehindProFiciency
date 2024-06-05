@@ -1,0 +1,224 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Proficiency\\Proficiency\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|d:\\proficiency\\proficiency\\proficiency\\migrations\\20240602091159_proficiencymigration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|solutionrelative:proficiency\\migrations\\20240602091159_proficiencymigration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|d:\\proficiency\\proficiency\\proficiency\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|solutionrelative:proficiency\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|d:\\proficiency\\proficiency\\proficiency\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|solutionrelative:proficiency\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|d:\\proficiency\\proficiency\\proficiency\\controllers\\timetablecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|solutionrelative:proficiency\\controllers\\timetablecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|d:\\proficiency\\proficiency\\proficiency\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|solutionrelative:proficiency\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|d:\\proficiency\\proficiency\\proficiency\\controllers\\attendancecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|solutionrelative:proficiency\\controllers\\attendancecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|d:\\proficiency\\proficiency\\proficiency\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|solutionrelative:proficiency\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|d:\\proficiency\\proficiency\\proficiency\\models\\timetable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|solutionrelative:proficiency\\models\\timetable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|d:\\proficiency\\proficiency\\proficiency\\models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|solutionrelative:proficiency\\models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|d:\\proficiency\\proficiency\\proficiency\\models\\attendance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|solutionrelative:proficiency\\models\\attendance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|d:\\proficiency\\proficiency\\proficiency\\models\\day.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|solutionrelative:proficiency\\models\\day.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|d:\\proficiency\\proficiency\\proficiency\\models\\lecture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4900E28-A652-4BFD-BA68-CBFC1425CE39}|Proficiency\\Proficiency.csproj|solutionrelative:proficiency\\models\\lecture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "20240602091159_ProficiencyMigration.cs",
+              "DocumentMoniker": "D:\\Proficiency\\Proficiency\\Proficiency\\Migrations\\20240602091159_ProficiencyMigration.cs",
+              "RelativeDocumentMoniker": "Proficiency\\Migrations\\20240602091159_ProficiencyMigration.cs",
+              "ToolTip": "D:\\Proficiency\\Proficiency\\Proficiency\\Migrations\\20240602091159_ProficiencyMigration.cs",
+              "RelativeToolTip": "Proficiency\\Migrations\\20240602091159_ProficiencyMigration.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-02T09:11:59.684Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Proficiency\\Proficiency\\Proficiency\\Program.cs",
+              "RelativeDocumentMoniker": "Proficiency\\Program.cs",
+              "ToolTip": "D:\\Proficiency\\Proficiency\\Proficiency\\Program.cs",
+              "RelativeToolTip": "Proficiency\\Program.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAABQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-02T09:09:13.684Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Proficiency\\Proficiency\\Proficiency\\appsettings.json",
+              "RelativeDocumentMoniker": "Proficiency\\appsettings.json",
+              "ToolTip": "D:\\Proficiency\\Proficiency\\Proficiency\\appsettings.json",
+              "RelativeToolTip": "Proficiency\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-06-02T09:07:19.025Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TimeTableController.cs",
+              "DocumentMoniker": "D:\\Proficiency\\Proficiency\\Proficiency\\Controllers\\TimeTableController.cs",
+              "RelativeDocumentMoniker": "Proficiency\\Controllers\\TimeTableController.cs",
+              "ToolTip": "D:\\Proficiency\\Proficiency\\Proficiency\\Controllers\\TimeTableController.cs",
+              "RelativeToolTip": "Proficiency\\Controllers\\TimeTableController.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAAwAgAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-02T09:06:16.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "StudentController.cs",
+              "DocumentMoniker": "D:\\Proficiency\\Proficiency\\Proficiency\\Controllers\\StudentController.cs",
+              "RelativeDocumentMoniker": "Proficiency\\Controllers\\StudentController.cs",
+              "ToolTip": "D:\\Proficiency\\Proficiency\\Proficiency\\Controllers\\StudentController.cs",
+              "RelativeToolTip": "Proficiency\\Controllers\\StudentController.cs",
+              "ViewState": "AQIAADkAAAAAAAAAAAAowAcAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-02T09:05:43.493Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AttendanceController.cs",
+              "DocumentMoniker": "D:\\Proficiency\\Proficiency\\Proficiency\\Controllers\\AttendanceController.cs",
+              "RelativeDocumentMoniker": "Proficiency\\Controllers\\AttendanceController.cs",
+              "ToolTip": "D:\\Proficiency\\Proficiency\\Proficiency\\Controllers\\AttendanceController.cs",
+              "RelativeToolTip": "Proficiency\\Controllers\\AttendanceController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-02T09:04:59.676Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "D:\\Proficiency\\Proficiency\\Proficiency\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Proficiency\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "D:\\Proficiency\\Proficiency\\Proficiency\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Proficiency\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-02T09:03:32.238Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TimeTable.cs",
+              "DocumentMoniker": "D:\\Proficiency\\Proficiency\\Proficiency\\Models\\TimeTable.cs",
+              "RelativeDocumentMoniker": "Proficiency\\Models\\TimeTable.cs",
+              "ToolTip": "D:\\Proficiency\\Proficiency\\Proficiency\\Models\\TimeTable.cs",
+              "RelativeToolTip": "Proficiency\\Models\\TimeTable.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAwwA0AAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-02T09:02:31.412Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Student.cs",
+              "DocumentMoniker": "D:\\Proficiency\\Proficiency\\Proficiency\\Models\\Student.cs",
+              "RelativeDocumentMoniker": "Proficiency\\Models\\Student.cs",
+              "ToolTip": "D:\\Proficiency\\Proficiency\\Proficiency\\Models\\Student.cs",
+              "RelativeToolTip": "Proficiency\\Models\\Student.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-02T09:02:09.024Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Attendance.cs",
+              "DocumentMoniker": "D:\\Proficiency\\Proficiency\\Proficiency\\Models\\Attendance.cs",
+              "RelativeDocumentMoniker": "Proficiency\\Models\\Attendance.cs",
+              "ToolTip": "D:\\Proficiency\\Proficiency\\Proficiency\\Models\\Attendance.cs",
+              "RelativeToolTip": "Proficiency\\Models\\Attendance.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-02T09:01:28.923Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Lecture.cs",
+              "DocumentMoniker": "D:\\Proficiency\\Proficiency\\Proficiency\\Models\\Lecture.cs",
+              "RelativeDocumentMoniker": "Proficiency\\Models\\Lecture.cs",
+              "ToolTip": "D:\\Proficiency\\Proficiency\\Proficiency\\Models\\Lecture.cs",
+              "RelativeToolTip": "Proficiency\\Models\\Lecture.cs",
+              "ViewState": "AQIAABwAAAAAAAAAAAAowCcAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-02T08:58:49.647Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Day.cs",
+              "DocumentMoniker": "D:\\Proficiency\\Proficiency\\Proficiency\\Models\\Day.cs",
+              "RelativeDocumentMoniker": "Proficiency\\Models\\Day.cs",
+              "ToolTip": "D:\\Proficiency\\Proficiency\\Proficiency\\Models\\Day.cs",
+              "RelativeToolTip": "Proficiency\\Models\\Day.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-02T08:58:13.58Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
