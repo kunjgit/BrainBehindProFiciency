@@ -3941,11 +3941,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\USER\\Desktop\\Disha\\Proficiency\\Proficiency\\Proficiency\\Proficiency.csproj",
+      "projectUniqueName": "C:\\Users\\USER\\Desktop\\BrainBehindProFiciency\\Proficiency\\Proficiency.csproj",
       "projectName": "Proficiency",
-      "projectPath": "C:\\Users\\USER\\Desktop\\Disha\\Proficiency\\Proficiency\\Proficiency\\Proficiency.csproj",
+      "projectPath": "C:\\Users\\USER\\Desktop\\BrainBehindProFiciency\\Proficiency\\Proficiency.csproj",
       "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\USER\\Desktop\\Disha\\Proficiency\\Proficiency\\Proficiency\\obj\\",
+      "outputPath": "C:\\Users\\USER\\Desktop\\BrainBehindProFiciency\\Proficiency\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",

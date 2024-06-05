@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "srdMWNvw4FN76cYyjpu7qesxD+oUvBnUMoMIiIaP9UDbcAVL062p+gJ8y3RqFtRwi041ZrrxnMlVTP2VpvlrNw==",
+  "dgSpecHash": "de/rzi723jttnNQcfyMHtYXknkMQZMRGZteVWrbwZngeywiw5+ggU98r9iUiJSPAHQ+QVGuPU5zQpI8b8j9QBQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\USER\\Desktop\\Disha\\Proficiency\\Proficiency\\Proficiency\\Proficiency.csproj",
+  "projectFilePath": "C:\\Users\\USER\\Desktop\\BrainBehindProFiciency\\Proficiency\\Proficiency.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\USER\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
