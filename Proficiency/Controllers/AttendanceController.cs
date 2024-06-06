@@ -47,7 +47,7 @@ namespace Proficiency.Controllers
         }
 
         // GET api/attendance/{id}
-        [HttpGet("{id}/abc/{subjectname}")]
+        [HttpGet("{id}/subwise/{subjectname}")]
         public IActionResult GetFromSubject(int id, string subjectname)
         {
             var attendances = _context.Attendances.Where(a => a.StudentId == id && _context.Lectures.Any
@@ -56,7 +56,7 @@ namespace Proficiency.Controllers
 
         }
 
-        [HttpGet("{id}/pqr/{profname}")]
+        [HttpGet("{id}/profwise/{profname}")]
         public IActionResult GetFromProfName(int id, string profname)
         {
             var attendances = _context.Attendances.Where(a => a.StudentId == id && _context.Lectures.Any
@@ -65,7 +65,7 @@ namespace Proficiency.Controllers
         }
 
 
-        [HttpGet("{id}/stu/{date}")]
+        [HttpGet("{id}/datewise/{date}")]
         public IActionResult GetFromDate(int id, string date)
         {
             var attendances = _context.Attendances.Where(a => a.StudentId == id && a.Date.Date.ToString() == date).ToList();
