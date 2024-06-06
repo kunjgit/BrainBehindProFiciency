@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Hosting;
 using System.Xml.Linq;
 using DotNetEnv.Configuration;
 using DotNetEnv;
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +22,11 @@ builder.Configuration.AddDotNetEnv(
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(option =>
+{
+    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Proficiency", Version = "0.1" });
+    
+});
 builder.Services.AddCors(o => o.AddPolicy("OurPolicy",
                       builder =>
                       {
@@ -36,11 +42,9 @@ var app = builder.Build();
 
 app.UseCors("OurPolicy");
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+    
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
