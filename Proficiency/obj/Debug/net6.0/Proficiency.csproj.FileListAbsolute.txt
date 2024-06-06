@@ -259,3 +259,7 @@ C:\Users\USER\Desktop\BrainBehindProFiciency\Proficiency\obj\Debug\net6.0\refint
 C:\Users\USER\Desktop\BrainBehindProFiciency\Proficiency\obj\Debug\net6.0\Proficiency.pdb
 C:\Users\USER\Desktop\BrainBehindProFiciency\Proficiency\obj\Debug\net6.0\Proficiency.genruntimeconfig.cache
 C:\Users\USER\Desktop\BrainBehindProFiciency\Proficiency\obj\Debug\net6.0\ref\Proficiency.dll
+C:\Users\USER\Desktop\BrainBehindProFiciency\Proficiency\bin\Debug\net6.0\Azure.Extensions.AspNetCore.Configuration.Secrets.dll
+C:\Users\USER\Desktop\BrainBehindProFiciency\Proficiency\bin\Debug\net6.0\Azure.Security.KeyVault.Secrets.dll
+C:\Users\USER\Desktop\BrainBehindProFiciency\Proficiency\bin\Debug\net6.0\DotNetEnv.dll
+C:\Users\USER\Desktop\BrainBehindProFiciency\Proficiency\bin\Debug\net6.0\Sprache.dll

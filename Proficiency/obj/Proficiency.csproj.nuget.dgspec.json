@@ -49,6 +49,10 @@
               "target": "Package",
               "version": "[1.6.0, )"
             },
+            "DotNetEnv": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.0, )"
