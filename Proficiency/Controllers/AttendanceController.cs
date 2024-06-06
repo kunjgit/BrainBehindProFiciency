@@ -29,7 +29,7 @@ namespace Proficiency.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpGet("/")]
+        [HttpGet]
         public IActionResult GetAttendances()
         {
             var allAttendances = _context.Attendances.ToList();
