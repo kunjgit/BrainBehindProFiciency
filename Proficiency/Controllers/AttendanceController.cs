@@ -87,7 +87,7 @@ namespace Proficiency.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{lectureid}/{date}")]
+        [HttpDelete("{lectureid}/delete_date/{date}")]
         public IActionResult DeleteByLectureIdAndDate(string lectureid, string date)
         {
             var attendance = _context.Attendances.FirstOrDefault(a => a.LectureId == lectureid && a.Date.Date.ToString() == date);
