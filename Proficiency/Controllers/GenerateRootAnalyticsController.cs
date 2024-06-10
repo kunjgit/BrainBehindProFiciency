@@ -1,270 +1,242 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Proficiency.Data;
 using Proficiency.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Proficiency.Controllers;
-
-
+namespace Proficiency.Controllers
+{
     [Route("api/[controller]")]
     [ApiController]
     public class GenerateRootAnalyticsController : ControllerBase
     {
-        private readonly TimeTablesController _tt;
         private readonly ApplicationDbContext _context;
-        private readonly CurrentVersionController _cur_version;
-        private readonly TimeTableAnalyticsController _ttanalytics;
-        private readonly RootAnalyticController _ranalyticscontroller;
-        public GenerateRootAnalyticsController(TimeTablesController tt, CurrentVersionController cur_version, ApplicationDbContext context , TimeTableAnalyticsController ttanalytics , RootAnalyticController ranalyticscontroller)
+
+        public GenerateRootAnalyticsController(ApplicationDbContext context)
         {
-            _tt = tt;
             _context = context;
-            _cur_version = cur_version;
-            _ttanalytics = ttanalytics;
-            _ranalyticscontroller = ranalyticscontroller;
         }
-        
-        
-        
+
         [HttpGet]
         public async Task<ActionResult<RootAnalytic>> Index()
         {
-
-            var cvTask = _cur_version.GetCurrentVersion();
-            var cvResult = await cvTask;
-            var currentVersion = cvResult.Value;
+            var currentVersion = await _context.CurrentVersions.FirstOrDefaultAsync();
 
             if (currentVersion == null)
             {
                 return NotFound("Current version not found.");
             }
 
-            // sort of fetching currentTT details and upating it !
-            var ttResult =  _tt.Get(currentVersion.ActiveTTId);
-            var timeTable = ttResult.Value;
+            var timeTable = await _context.TimeTables
+                .Include(tt => tt.Days)
+                .ThenInclude(d => d.Lectures)
+                .FirstOrDefaultAsync(tt => tt.Id == currentVersion.ActiveTTId);
 
             if (timeTable == null)
             {
-                return NotFound("Timetable not found.");
+                return NotFound("Timetable not found." + currentVersion.ActiveTTId);
             }
 
-            
-            
-            
-            
-            //doing calculation for fetching the days passed there !
-            DateTime lastupdate_day = timeTable.RecentUpdatedDate;
-            DateTime current_day = DateTime.Now;
-            Dictionary<DayName, int> days_passed = CountDaysBetween(lastupdate_day, current_day);
-            
-            //checking if there is already timetable analytics there ...
+            DateTime lastUpdateDay = timeTable.RecentUpdatedDate;
+            DateTime currentDay = DateTime.Now;
+            Dictionary<DayName, int> daysPassed = CountDaysBetween(lastUpdateDay, currentDay);
 
-            var ttana=_ttanalytics.GetTimeTableAnalytic();
-          
-            var x = ttana.Value;
-
-           
+            var ttana = await _context.TimeTableAnalytics.FindAsync(1);
+            var x = ttana;
             
-            if (x == null)// we are not having timetable analytic so we have to create one....
+            foreach (DayName day in Enum.GetValues(typeof(DayName)))
             {
+                // Ensure the keys exist in the dictionaries
+                if (!x.total.ContainsKey(day))
+                {
+                    x.total[day] = 0;
+                }
+                if (!x.prof.ContainsKey(day))
+                {
+                    x.prof[day] = new Dictionary<string, int>();
+                }
+                if (!x.subs.ContainsKey(day))
+                {
+                    x.subs[day] = new Dictionary<string, int>();
+                }
+            }
 
+            if (x == null)
+            {
                 Dictionary<DayName, Dictionary<string, int>> subs = new Dictionary<DayName, Dictionary<string, int>>();
                 Dictionary<DayName, Dictionary<string, int>> profs = new Dictionary<DayName, Dictionary<string, int>>();
-                Dictionary<DayName, int> total=new Dictionary<DayName, int>();
-            
+                Dictionary<DayName, int> total = new Dictionary<DayName, int>();
+
+                foreach (DayName day in Enum.GetValues(typeof(DayName)))
+                {
+                    total[day] = 0;
+                    profs[day] = new Dictionary<string, int>();
+                    subs[day] = new Dictionary<string, int>();
+                }
+
+                if (timeTable?.Days == null)
+                {
+                    return NotFound("Timetable days are null!" + timeTable.Id + timeTable.Days.First().Date);
+                }
+
                 foreach (var a in timeTable.Days)
                 {
-
                     foreach (var b in a.Lectures)
                     {
+                        if (!subs[a.DayName].ContainsKey(b.SubjectName))
+                        {
+                            subs[a.DayName][b.SubjectName] = 0;
+                        }
+                        if (!profs[a.DayName].ContainsKey(b.ProfName))
+                        {
+                            profs[a.DayName][b.ProfName] = 0;
+                        }
+
                         total[a.DayName]++;
                         subs[a.DayName][b.SubjectName]++;
                         profs[a.DayName][b.ProfName]++;
                     }
                 }
-                
-                TimeTableAnalytic newanalytic=new TimeTableAnalytic();
-                newanalytic.subs = subs;
-                newanalytic.prof = profs;
-                newanalytic.version = currentVersion.ActiveTTId;
-                newanalytic.total = total;
 
-                await _ttanalytics.CreateTimeTableAnalytic(newanalytic);
-                //creating timetable analytic
-                subs.Clear();
-                profs.Clear();
-                total.Clear();
+                TimeTableAnalytic newAnalytic = new TimeTableAnalytic
+                {
+                    subs = subs,
+                    prof = profs,
+                    version = currentVersion.ActiveTTId,
+                    total = total
+                };
 
-                x = newanalytic;
+                await _context.TimeTableAnalytics.AddAsync(newAnalytic);
+                await _context.SaveChangesAsync();
+
+                x = newAnalytic;
             }
 
-            // generating the root analytics
+            var temp = await _context.RootAnalytics.FindAsync(currentVersion.ActiveTTId);
+            RootAnalytic previousRoot = temp;
 
-            var temp = _ranalyticscontroller.GetRootAnalyticByV(currentVersion.ActiveTTId);
-            var tempa = await temp;
-            RootAnalytic previous_root = tempa.Value;
-
-            int total_days = 0;
-            if (previous_root==null)
+            int totalDays = 0;
+            if (previousRoot == null)
             {
-                //creating new root analytics
-                Dictionary<string,ProfAnalytic>prof_details = new Dictionary<string, ProfAnalytic>();
-                Dictionary<string, SubAnalytic> sub_details = new Dictionary<string, SubAnalytic>();
-                int total_lectures=0;
-                foreach (var a in days_passed)
+                Dictionary<string, ProfAnalytic> profDetails = new Dictionary<string, ProfAnalytic>();
+                Dictionary<string, SubAnalytic> subDetails = new Dictionary<string, SubAnalytic>();
+                int totalLectures = 0;
+
+                foreach (KeyValuePair<DayName,int> a in daysPassed)
                 {
-                    // Fetching for a single day
                     DayName d = a.Key;
                     int days = a.Value;
-                    total_days += x.total[d] * days;
-                    // Process prof details
-                    foreach (var prof_on_day in x.prof[d])
+                    totalDays += x.total[d] * days;
+
+                    foreach (var profOnDay in x.prof[d])
                     {
-                        if (!prof_details.ContainsKey(prof_on_day.Key))
+                        if (!profDetails.ContainsKey(profOnDay.Key))
                         {
-                            prof_details[prof_on_day.Key] = new ProfAnalytic
+                            profDetails[profOnDay.Key] = new ProfAnalytic
                             {
-                                Professor = prof_on_day.Key,
+                                Professor = profOnDay.Key,
                                 Lectures = 0
                             };
                         }
 
-
-                        prof_details[prof_on_day.Key].Lectures+=prof_on_day.Value*days;
+                        profDetails[profOnDay.Key].Lectures += profOnDay.Value * days;
                     }
 
-                    // Process sub details
-                    foreach (var sub_on_day in x.subs[d])
+                    foreach (var subOnDay in x.subs[d])
                     {
-                        if (!sub_details.ContainsKey(sub_on_day.Key))
+                        if (!subDetails.ContainsKey(subOnDay.Key))
                         {
-                            sub_details[sub_on_day.Key] = new SubAnalytic
+                            subDetails[subOnDay.Key] = new SubAnalytic
                             {
-                                Sub = sub_on_day.Key,
+                                Sub = subOnDay.Key,
                                 Lectures = 0
                             };
                         }
-                        sub_details[sub_on_day.Key].Lectures+=sub_on_day.Value*days;
+                        subDetails[subOnDay.Key].Lectures += subOnDay.Value * days;
                     }
-
-
-                   
                 }
-                
-                
-                RootAnalytic ra = new RootAnalytic();
-                foreach (var p in prof_details)
+
+                RootAnalytic ra = new RootAnalytic
                 {
-                    ra.Profs.Add(p.Value);
-                }
+                    Profs = profDetails.Values.ToList(),
+                    Subs = subDetails.Values.ToList(),
+                    TotalLectures = totalLectures
+                };
 
-                foreach (var s in sub_details)
-                {
-                    ra.Subs.Add(s.Value);
-                }
-
-                ra.TotalLectures = total_lectures;
-
-                    
-                await _ranalyticscontroller.PostRootAnalytic(ra);
+                await _context.RootAnalytics.AddAsync(ra);
+                await _context.SaveChangesAsync();
 
                 return Ok();
-
-
             }
             else
             {
-                //we have to reuse previous analytics so that we can optimize the pre calculated values
-                Dictionary<string,ProfAnalytic>prof_details = new Dictionary<string, ProfAnalytic>();
-                Dictionary<string, SubAnalytic> sub_details = new Dictionary<string, SubAnalytic>();
+                Dictionary<string, ProfAnalytic> profDetails = new Dictionary<string, ProfAnalytic>();
+                Dictionary<string, SubAnalytic> subDetails = new Dictionary<string, SubAnalytic>();
 
-    
-                foreach (var pr in previous_root.Profs)
+                foreach (var pr in previousRoot.Profs)
                 {
-                    string pro_name = pr.Professor;
-                    prof_details[pro_name] = pr;
+                    string profName = pr.Professor;
+                    profDetails[profName] = pr;
                 }
-                foreach (var sb in previous_root.Subs)
+
+                foreach (var sb in previousRoot.Subs)
                 {
-                    string pro_name = sb.Sub;
-                    sub_details[pro_name] = sb;
+                    string subName = sb.Sub;
+                    subDetails[subName] = sb;
                 }
-                
-                int total_lectures=previous_root.TotalLectures;
-                foreach (var a in days_passed)
+
+                int totalLectures = previousRoot.TotalLectures;
+                foreach (var a in daysPassed)
                 {
-                    // Fetching for a single day
                     DayName d = a.Key;
                     int days = a.Value;
-                    total_days += x.total[d] * days;
-                    // Process prof details
-                    foreach (var prof_on_day in x.prof[d])
+                    totalDays += x.total[d] * days;
+
+                    foreach (var profOnDay in x.prof[d])
                     {
-                        if (!prof_details.ContainsKey(prof_on_day.Key))
+                        if (!profDetails.ContainsKey(profOnDay.Key))
                         {
-                            prof_details[prof_on_day.Key] = new ProfAnalytic
+                            profDetails[profOnDay.Key] = new ProfAnalytic
                             {
-                                Professor = prof_on_day.Key,
+                                Professor = profOnDay.Key,
                                 Lectures = 0
                             };
                         }
 
-
-                        prof_details[prof_on_day.Key].Lectures+=prof_on_day.Value*days;
+                        profDetails[profOnDay.Key].Lectures += profOnDay.Value * days;
                     }
 
-                    // Process sub details
-                    foreach (var sub_on_day in x.subs[d])
+                    foreach (var subOnDay in x.subs[d])
                     {
-                        if (!sub_details.ContainsKey(sub_on_day.Key))
+                        if (!subDetails.ContainsKey(subOnDay.Key))
                         {
-                            sub_details[sub_on_day.Key] = new SubAnalytic
+                            subDetails[subOnDay.Key] = new SubAnalytic
                             {
-                                Sub = sub_on_day.Key,
+                                Sub = subOnDay.Key,
                                 Lectures = 0
                             };
                         }
-                        sub_details[sub_on_day.Key].Lectures+=sub_on_day.Value*days;
+                        subDetails[subOnDay.Key].Lectures += subOnDay.Value * days;
                     }
-
-
-                   
                 }
-                // make sure you are having upated details
-                RootAnalytic ra = new RootAnalytic();
-                foreach (var p in prof_details)
+
+                RootAnalytic ra = new RootAnalytic
                 {
-                    ra.Profs.Add(p.Value);
-                }
+                    Profs = profDetails.Values.ToList(),
+                    Subs = subDetails.Values.ToList(),
+                    TotalLectures = totalLectures
+                };
 
-                foreach (var s in sub_details)
-                {
-                    ra.Subs.Add(s.Value);
-                }
+                _context.RootAnalytics.Update(ra);
+                await _context.SaveChangesAsync();
 
-                ra.TotalLectures = total_lectures;
-
-
-                int ra_id = previous_root.id;
-               await  _ranalyticscontroller.PutRootAnalytic(ra_id,ra);
-
-               return Ok();
-               
-
-
-
+                return Ok();
             }
-            
-            
-            
-            
-            
-           
-
-            await _context.SaveChangesAsync();
-
-            return Ok();
         }
-        
+
         static Dictionary<DayName, int> CountDaysBetween(DateTime startDate, DateTime endDate)
         {
             Dictionary<DayName, int> dayCountDictionary = new Dictionary<DayName, int>();
@@ -287,3 +259,4 @@ namespace Proficiency.Controllers;
             return dayCountDictionary;
         }
     }
+}
