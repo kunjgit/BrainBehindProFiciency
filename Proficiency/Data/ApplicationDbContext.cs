@@ -17,9 +17,9 @@ namespace Proficiency.Data
         public DbSet<SubAnalytic>SubAnalytics { get; set; }
         public DbSet<StudAnalytic>StudAnalytics { get; set; }
         public DbSet<RootAnalytic>RootAnalytics { get; set; }
+        public DbSet<CurrentVersion>CurrentVersions { get; set; }
         
-        
-        
+        public DbSet<TimeTableAnalytic> TimeTableAnalytics { get; set; }
         
         
 

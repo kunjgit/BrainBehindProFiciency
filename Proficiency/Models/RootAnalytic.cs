@@ -22,6 +22,7 @@ namespace Proficiency.Models
             TotalLectures = 0;
 
         }
+        
     }
 
 }

@@ -26,12 +26,12 @@ namespace Proficiency.Controllers;
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<RootAnalytic>> GetRootAnalytic(int id)
+        public async Task<ActionResult<RootAnalytic>> GetRootAnalyticByV(int id)
         {
             var rootAnalytic = await _context.RootAnalytics
                                              .Include(ra => ra.Profs)
                                              .Include(ra => ra.Subs)
-                                             .FirstOrDefaultAsync(ra => ra.id == id);
+                                             .FirstOrDefaultAsync(ra => ra.Version == id);
 
             if (rootAnalytic == null)
             {
