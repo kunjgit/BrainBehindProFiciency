@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proficiency.Data;
 
@@ -11,9 +12,11 @@ using Proficiency.Data;
 namespace Proficiency.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240610045955_analytics-updated-5")]
+    partial class analyticsupdated5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,7 +111,7 @@ namespace Proficiency.Migrations
                     b.ToTable("Lectures");
                 });
 
-            modelBuilder.Entity("Proficiency.Models.ProfAnalytic", b =>
+            modelBuilder.Entity("Proficiency.Models.ProfWiseAnalytics", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -123,22 +126,22 @@ namespace Proficiency.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RootAnalyticid")
+                    b.Property<int?>("RootAnalyticsid")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StudAnalyticId")
+                    b.Property<int?>("StudentWiseAnalyticsId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RootAnalyticid");
+                    b.HasIndex("RootAnalyticsid");
 
-                    b.HasIndex("StudAnalyticId");
+                    b.HasIndex("StudentWiseAnalyticsId");
 
-                    b.ToTable("ProfAnalytics");
+                    b.ToTable("ProWise");
                 });
 
-            modelBuilder.Entity("Proficiency.Models.RootAnalytic", b =>
+            modelBuilder.Entity("Proficiency.Models.RootAnalytics", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -158,28 +161,6 @@ namespace Proficiency.Migrations
                     b.HasKey("id");
 
                     b.ToTable("RootAnalytics");
-                });
-
-            modelBuilder.Entity("Proficiency.Models.StudAnalytic", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("RecentUpate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("StuId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TotalLectures")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("StudAnalytics");
                 });
 
             modelBuilder.Entity("Proficiency.Models.Student", b =>
@@ -210,7 +191,29 @@ namespace Proficiency.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("Proficiency.Models.SubAnalytic", b =>
+            modelBuilder.Entity("Proficiency.Models.StudentWiseAnalytics", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("RecentUpate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("StuId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalLectures")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StudentWiseAnalytics");
+                });
+
+            modelBuilder.Entity("Proficiency.Models.SubWiseAnalytics", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -221,10 +224,10 @@ namespace Proficiency.Migrations
                     b.Property<int>("Lectures")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RootAnalyticid")
+                    b.Property<int?>("RootAnalyticsid")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StudAnalyticId")
+                    b.Property<int?>("StudentWiseAnalyticsId")
                         .HasColumnType("int");
 
                     b.Property<string>("Sub")
@@ -233,11 +236,11 @@ namespace Proficiency.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RootAnalyticid");
+                    b.HasIndex("RootAnalyticsid");
 
-                    b.HasIndex("StudAnalyticId");
+                    b.HasIndex("StudentWiseAnalyticsId");
 
-                    b.ToTable("SubAnalytics");
+                    b.ToTable("SubWise");
                 });
 
             modelBuilder.Entity("Proficiency.Models.TimeTable", b =>
@@ -279,26 +282,26 @@ namespace Proficiency.Migrations
                         .HasForeignKey("DayId");
                 });
 
-            modelBuilder.Entity("Proficiency.Models.ProfAnalytic", b =>
+            modelBuilder.Entity("Proficiency.Models.ProfWiseAnalytics", b =>
                 {
-                    b.HasOne("Proficiency.Models.RootAnalytic", null)
+                    b.HasOne("Proficiency.Models.RootAnalytics", null)
                         .WithMany("Profs")
-                        .HasForeignKey("RootAnalyticid");
+                        .HasForeignKey("RootAnalyticsid");
 
-                    b.HasOne("Proficiency.Models.StudAnalytic", null)
+                    b.HasOne("Proficiency.Models.StudentWiseAnalytics", null)
                         .WithMany("Profwise")
-                        .HasForeignKey("StudAnalyticId");
+                        .HasForeignKey("StudentWiseAnalyticsId");
                 });
 
-            modelBuilder.Entity("Proficiency.Models.SubAnalytic", b =>
+            modelBuilder.Entity("Proficiency.Models.SubWiseAnalytics", b =>
                 {
-                    b.HasOne("Proficiency.Models.RootAnalytic", null)
+                    b.HasOne("Proficiency.Models.RootAnalytics", null)
                         .WithMany("Subs")
-                        .HasForeignKey("RootAnalyticid");
+                        .HasForeignKey("RootAnalyticsid");
 
-                    b.HasOne("Proficiency.Models.StudAnalytic", null)
+                    b.HasOne("Proficiency.Models.StudentWiseAnalytics", null)
                         .WithMany("SubWise")
-                        .HasForeignKey("StudAnalyticId");
+                        .HasForeignKey("StudentWiseAnalyticsId");
                 });
 
             modelBuilder.Entity("Proficiency.Models.Day", b =>
@@ -306,14 +309,14 @@ namespace Proficiency.Migrations
                     b.Navigation("Lectures");
                 });
 
-            modelBuilder.Entity("Proficiency.Models.RootAnalytic", b =>
+            modelBuilder.Entity("Proficiency.Models.RootAnalytics", b =>
                 {
                     b.Navigation("Profs");
 
                     b.Navigation("Subs");
                 });
 
-            modelBuilder.Entity("Proficiency.Models.StudAnalytic", b =>
+            modelBuilder.Entity("Proficiency.Models.StudentWiseAnalytics", b =>
                 {
                     b.Navigation("Profwise");
 
