@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Proficiency.Data;
 using Proficiency.Models;
 
@@ -72,12 +73,21 @@ namespace Proficiency.Controllers
         public ActionResult Delete(int id)
         {
             var student = _context.Students.Find(id);
+        // made sure if user has gone then we have to remove all the information for the user !
+            var attendances = _context.Attendances
+                .Where(a => a.StudentId == id).ToList();
+            var stuana = _context.StudAnalytics.Where(s => s.StuId == id)
+                .Include(stuana=>stuana.Profwise)
+                .Include(stuana=>stuana.SubWise).ToList();
             if (student == null)
             {
                 return NotFound();
             }
 
+            
             _context.Students.Remove(student);
+            _context.Attendances.RemoveRange(attendances);
+            _context.StudAnalytics.RemoveRange(stuana);
             _context.SaveChanges();
 
             return NoContent();

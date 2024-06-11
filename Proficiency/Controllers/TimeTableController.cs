@@ -44,7 +44,8 @@ namespace Proficiency.Controllers
         [HttpPost]
         public ActionResult<TimeTable> Post([FromBody] TimeTable timeTable)
         {
-            timeTable.RecentUpdatedDate = DateTime.Now;
+            TimeZoneInfo indiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
+            timeTable.RecentUpdatedDate = TimeZoneInfo.ConvertTime(DateTime.Now,indiaTimeZone);
 
             _context.TimeTables.Add(timeTable);
             _context.SaveChanges();
@@ -68,7 +69,8 @@ namespace Proficiency.Controllers
             timeTable.Depart = updatedTimeTable.Depart;
             timeTable.Sem = updatedTimeTable.Sem;
             timeTable.Division = updatedTimeTable.Division;
-            timeTable.RecentUpdatedDate = DateTime.Now;
+            TimeZoneInfo indiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
+            timeTable.RecentUpdatedDate = TimeZoneInfo.ConvertTime(DateTime.Now,indiaTimeZone);
 
             if (updatedTimeTable.Days != null)
             {
@@ -122,12 +124,17 @@ namespace Proficiency.Controllers
                 .Include(tt => tt.Days)
                 .ThenInclude(d => d.Lectures)
                 .FirstOrDefault(tt => tt.Id == id);
+            
+            
+            // if timetable itself is right now delete we have to make sure that we are deleting the rootanalytics associated with it 
 
+            var rana = _context.RootAnalytics.Where(ra => ra.Version == id).FirstOrDefault();
             if (timeTable == null)
             {
                 return NotFound();
             }
 
+            _context.RootAnalytics.Remove(rana);
             _context.TimeTables.Remove(timeTable);
             _context.SaveChanges();
 

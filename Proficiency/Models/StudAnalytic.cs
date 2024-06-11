@@ -19,7 +19,8 @@ namespace Proficiency.Models
         public StudAnalytic()
         {
             this.TotalLectures = 0;
-            this.RecentUpate = DateTime.Now;
+            TimeZoneInfo indiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
+            this.RecentUpate = TimeZoneInfo.ConvertTime(DateTime.Now,indiaTimeZone);
 
         }
     }

@@ -18,8 +18,15 @@ namespace Proficiency.Controllers
         [HttpPost]
         public IActionResult AddAttendance([FromBody] Attendance attendance)
         {
+            
             if (attendance == null)
                 return BadRequest("Valid info missing");
+            if (_context.Students.Where(s => s.Id == attendance.StudentId).ToList().Count == 0)
+            {
+                return NotFound("user not found with the id you have created" + attendance.StudentId);
+                
+            }
+            
             if (ModelState.IsValid)
             {
                 _context.Attendances.Add(attendance);

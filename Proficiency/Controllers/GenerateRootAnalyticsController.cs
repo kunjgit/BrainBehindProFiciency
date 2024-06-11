@@ -41,7 +41,8 @@ namespace Proficiency.Controllers
             }
 
             DateTime lastUpdateDay = timeTable.RecentUpdatedDate;
-            DateTime currentDay = DateTime.Now;
+            TimeZoneInfo indiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
+            DateTime currentDay = TimeZoneInfo.ConvertTime(DateTime.Now,indiaTimeZone);
             Dictionary<DayName, int> daysPassed = CountDaysBetween(lastUpdateDay, currentDay);
             
                 //generating timetable analytics
@@ -156,7 +157,8 @@ namespace Proficiency.Controllers
             else
             {
                  lastUpdateDay = temp.LatestUpdate;
-                 currentDay = DateTime.Now;
+                indiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
+                 currentDay = TimeZoneInfo.ConvertTime(DateTime.Now, indiaTimeZone);
                 daysPassed = CountDaysBetween(lastUpdateDay, currentDay);
                 
                 Dictionary<string, ProfAnalytic> profDetails = new Dictionary<string, ProfAnalytic>();

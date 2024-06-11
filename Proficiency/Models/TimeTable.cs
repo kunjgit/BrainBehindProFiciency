@@ -22,7 +22,8 @@ namespace Proficiency.Models
         // Static constructor to set up the default schedule
         public TimeTable()
         {
-            RecentUpdatedDate = DateTime.Now;
+            TimeZoneInfo indiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
+            RecentUpdatedDate = TimeZoneInfo.ConvertTime(DateTime.Now,indiaTimeZone);
         }
     }
 }

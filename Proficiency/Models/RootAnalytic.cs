@@ -17,7 +17,8 @@ namespace Proficiency.Models
 
         public RootAnalytic()
         {
-            LatestUpdate = DateTime.Now;
+            TimeZoneInfo indiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
+            LatestUpdate = TimeZoneInfo.ConvertTime(DateTime.Now,indiaTimeZone);
             Version = 0;
             TotalLectures = 0;
 

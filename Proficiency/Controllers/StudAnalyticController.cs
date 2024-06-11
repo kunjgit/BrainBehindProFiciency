@@ -23,6 +23,16 @@ namespace Proficiency.Controllers;
                                  .Include(sa => sa.SubWise)
                                  .ToListAsync();
         }
+        
+        [HttpGet("/stu/{id}")]
+        public async Task<ActionResult<StudAnalytic>> GetById(int id)
+        {
+            return await  _context.StudAnalytics
+                .Include(sa => sa.Profwise)
+                .Include(sa => sa.SubWise)
+                .FirstOrDefaultAsync(sa=>sa.StuId==id);
+
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<StudAnalytic>> GetStudAnalytic(int id)
