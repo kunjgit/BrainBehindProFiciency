@@ -43,29 +43,9 @@ namespace Proficiency.Controllers
             DateTime lastUpdateDay = timeTable.RecentUpdatedDate;
             DateTime currentDay = DateTime.Now;
             Dictionary<DayName, int> daysPassed = CountDaysBetween(lastUpdateDay, currentDay);
-
-            var ttana = await _context.TimeTableAnalytics.FindAsync(1);
-            var x = ttana;
             
-            foreach (DayName day in Enum.GetValues(typeof(DayName)))
-            {
-                // Ensure the keys exist in the dictionaries
-                if (!x.total.ContainsKey(day))
-                {
-                    x.total[day] = 0;
-                }
-                if (!x.prof.ContainsKey(day))
-                {
-                    x.prof[day] = new Dictionary<string, int>();
-                }
-                if (!x.subs.ContainsKey(day))
-                {
-                    x.subs[day] = new Dictionary<string, int>();
-                }
-            }
-
-            if (x == null)
-            {
+                //generating timetable analytics
+                
                 Dictionary<DayName, Dictionary<string, int>> subs = new Dictionary<DayName, Dictionary<string, int>>();
                 Dictionary<DayName, Dictionary<string, int>> profs = new Dictionary<DayName, Dictionary<string, int>>();
                 Dictionary<DayName, int> total = new Dictionary<DayName, int>();
@@ -109,16 +89,16 @@ namespace Proficiency.Controllers
                     total = total
                 };
 
-                await _context.TimeTableAnalytics.AddAsync(newAnalytic);
-                await _context.SaveChangesAsync();
-
+                TimeTableAnalytic x;
                 x = newAnalytic;
-            }
+     
 
-            var temp = await _context.RootAnalytics.FindAsync(currentVersion.ActiveTTId);
+            var temp =  _context.RootAnalytics
+                .Include(r=>r.Profs)
+                .Include(r=>r.Subs)
+                .FirstOrDefault();
             RootAnalytic previousRoot = temp;
 
-            int totalDays = 0;
             if (previousRoot == null)
             {
                 Dictionary<string, ProfAnalytic> profDetails = new Dictionary<string, ProfAnalytic>();
@@ -129,7 +109,7 @@ namespace Proficiency.Controllers
                 {
                     DayName d = a.Key;
                     int days = a.Value;
-                    totalDays += x.total[d] * days;
+                    totalLectures += x.total[d] * days;
 
                     foreach (var profOnDay in x.prof[d])
                     {
@@ -163,7 +143,9 @@ namespace Proficiency.Controllers
                 {
                     Profs = profDetails.Values.ToList(),
                     Subs = subDetails.Values.ToList(),
-                    TotalLectures = totalLectures
+                    TotalLectures = totalLectures,
+                    Version = currentVersion.ActiveTTId,
+                    LatestUpdate = currentDay
                 };
 
                 await _context.RootAnalytics.AddAsync(ra);
@@ -173,6 +155,10 @@ namespace Proficiency.Controllers
             }
             else
             {
+                 lastUpdateDay = temp.LatestUpdate;
+                 currentDay = DateTime.Now;
+                daysPassed = CountDaysBetween(lastUpdateDay, currentDay);
+                
                 Dictionary<string, ProfAnalytic> profDetails = new Dictionary<string, ProfAnalytic>();
                 Dictionary<string, SubAnalytic> subDetails = new Dictionary<string, SubAnalytic>();
 
@@ -193,7 +179,7 @@ namespace Proficiency.Controllers
                 {
                     DayName d = a.Key;
                     int days = a.Value;
-                    totalDays += x.total[d] * days;
+                    totalLectures += x.total[d] * days;
 
                     foreach (var profOnDay in x.prof[d])
                     {
@@ -223,14 +209,12 @@ namespace Proficiency.Controllers
                     }
                 }
 
-                RootAnalytic ra = new RootAnalytic
-                {
-                    Profs = profDetails.Values.ToList(),
-                    Subs = subDetails.Values.ToList(),
-                    TotalLectures = totalLectures
-                };
-
-                _context.RootAnalytics.Update(ra);
+                temp.TotalLectures = totalLectures;
+                temp.Profs = profDetails.Values.ToList();
+                temp.Subs = subDetails.Values.ToList();
+                temp.Version = currentVersion.ActiveTTId;
+                temp.LatestUpdate = currentDay;
+                _context.RootAnalytics.Update(temp);
                 await _context.SaveChangesAsync();
 
                 return Ok();

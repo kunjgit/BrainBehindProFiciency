@@ -9,10 +9,8 @@ namespace Proficiency.Controllers;
     public class TimeTableAnalyticsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly CurrentVersionController _cur;
-        public TimeTableAnalyticsController(ApplicationDbContext context,CurrentVersionController cur)
+        public TimeTableAnalyticsController(ApplicationDbContext context)
         {
-            _cur = cur;
             _context = context;
         }
 
@@ -21,8 +19,8 @@ namespace Proficiency.Controllers;
         [HttpGet]
         public ActionResult<TimeTableAnalytic>  GetTimeTableAnalytic()
         {
-            
-            var timeTableAnalytic = _context.TimeTableAnalytics.Find(1);
+
+            var timeTableAnalytic = _context.TimeTableAnalytics.FirstOrDefault();
 
             if (timeTableAnalytic == null)
             {
@@ -41,10 +39,9 @@ namespace Proficiency.Controllers;
             {
                 return Conflict("TimeTableAnalytic already exists. Use PUT to update.");
             }
-    
-            var cvTask = _cur.GetCurrentVersion();
-            var cvResult = await cvTask;
-            var currentVersion = cvResult.Value;
+
+            var cvTask = _context.CurrentVersions.FirstOrDefault();
+            var currentVersion = cvTask;
             if (currentVersion!=null)
             {
                 int current_active_tt = currentVersion.ActiveTTId;
