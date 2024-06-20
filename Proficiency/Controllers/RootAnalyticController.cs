@@ -17,12 +17,12 @@ namespace Proficiency.Controllers;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<RootAnalytic>>> GetRootAnalytics()
+        public async Task<ActionResult<RootAnalytic>> GetRootAnalytics()
         {
             return await _context.RootAnalytics
                                  .Include(ra => ra.Profs)
                                  .Include(ra => ra.Subs)
-                                 .ToListAsync();
+                                 .FirstOrDefaultAsync();
         }
 
         [HttpGet("{id}")]
